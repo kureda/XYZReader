@@ -1,0 +1,3 @@
+<resources>
+    <integer name="detail_fragment_weight">1</integer>
+</resources>

@@ -16,13 +16,34 @@
 -->
 
 <resources>
+    <!--<style name="Theme.Bacon" parent="@style/Theme.AppCompat.Light.NoActionBar">-->
+    <!--</style>-->
+    <!--<style name="Theme.Bacon.Detail">-->
+    <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
+    <!--</style>-->
 
-    <style name="Theme.Bacon" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/light_blue</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <!--<item name="colorPrimaryLight">@color/pale_blue</item>-->
+        <item name="colorAccent">@color/amber</item>
 
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:textColorPrimary">@color/dark_gray</item>
+        <item name="android:textColorSecondary">@color/gray</item>
+
+        <item name="android:actionBarSize">@dimen/actionBarSize</item>
     </style>
 
-    <style name="Theme.Bacon.Detail">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
+    <style name="list" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/light_blue</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <!--<item name="colorPrimaryLight">@color/pale_blue</item>-->
+        <item name="colorAccent">@color/amber</item>
 
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:textColorPrimary">@color/dark_gray</item>
+        <item name="android:textColorSecondary">@color/gray</item>
+        <item name="android:background">@color/pale_blue</item>
+    </style>
 </resources>

@@ -16,10 +16,22 @@
 -->
 
 <resources>
-    <color name="photo_placeholder">#ccc</color>
+    <!--<color name="photo_placeholder">#ccc</color>-->
 
     <color name="theme_primary">#04561A</color>
     <color name="theme_primary_dark">#04561A</color>
     <color name="theme_accent">#04561A</color>
     <color name="ltgray">#ffe0e0e0</color>
+
+    <color name="light_blue">#03A9F4</color> <!-- primary -->
+    <color name="blue">#0288D1</color> <!-- primary_dark-->
+    <color name="pale_blue">#B3E5FC</color> <!-- primery_light -->
+    <color name="amber">#FFC107</color> <!-- accent -->
+    <color name="dark_gray">#212121</color> <!-- primary_text -->
+    <color name="gray">#757575</color> <!-- secondary_text -->
+    <color name="white">#FFFFFF</color> <!-- icons -->
+    <color name="light_gray">#BDBDBD</color> <!-- divider -->
+
+    <color name="transparent">#00000000</color>
+    <color name="translucent">#4000</color>
 </resources>

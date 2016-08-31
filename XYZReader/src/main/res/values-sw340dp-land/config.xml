@@ -1,0 +1,3 @@
+<resources>
+    <item type="bool" name="twoPaneMode">true</item>
+</resources>
