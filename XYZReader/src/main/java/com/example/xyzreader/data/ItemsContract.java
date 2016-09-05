@@ -1,7 +1,6 @@
 package com.example.xyzreader.data;
 
 import android.net.Uri;
-import android.util.Log;
 
 public class ItemsContract {
 	public static final String CONTENT_AUTHORITY = "com.example.xyzreader";
@@ -46,7 +45,6 @@ public class ItemsContract {
 					.appendPath("items")
 					.appendPath(Long.toString(_id))
 					.build();
-			Log.d("Serg",": fragment loader manager uri:"+uri.toString()+ "**********************");
 			return uri;
 		}
 

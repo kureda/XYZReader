@@ -1,3 +1,6 @@
 <resources>
     <integer name="detail_fragment_weight">1</integer>
+    <dimen name="detail_inner_horiz_margin">8dp</dimen>
+    <dimen name="scrim_width">0dp</dimen>
+    <dimen name="detail_subtitle_text_size">17sp</dimen>
 </resources>

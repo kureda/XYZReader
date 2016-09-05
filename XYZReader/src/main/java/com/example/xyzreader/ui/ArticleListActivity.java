@@ -1,6 +1,5 @@
 package com.example.xyzreader.ui;
 
-import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -13,12 +12,11 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
@@ -40,83 +38,56 @@ import com.example.xyzreader.data.UpdaterService;
  */
 public class ArticleListActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
-
-//    private static final String ITEM_ID = "itemId";
+    private static final String TAG = "ArticleListActivity";
     public static long sItemId = -1; //it is static to be changeable from other activities.
-
-    private Toolbar mToolbar;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
-    private boolean mIsRefreshing = false;
     private boolean mTwoPane;
     private BroadcastReceiver mRefreshingReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (UpdaterService.BROADCAST_ACTION_STATE_CHANGE.equals(intent.getAction())) {
-                mIsRefreshing = intent.getBooleanExtra(UpdaterService.EXTRA_REFRESHING, false);
-                updateRefreshingUI();
+                intent.getBooleanExtra(UpdaterService.EXTRA_REFRESHING, false);
             }
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        try {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_article_list);
-        ///    sItemId = (sItemId<0) ? 4863 : sItemId; // todo initialise properly
-        ///    sItemId = (sItemId<0) ? 0 : sItemId; // todo initialise properly
-            mTwoPane = getResources().getBoolean(R.bool.twoPaneMode);
-            Log.d("Serg", ": twoPane=" + mTwoPane);
-            mToolbar = (Toolbar) findViewById(R.id.toolbar);
-            final View toolbarContainerView = findViewById(R.id.toolbar_container);
-            mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-            mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-            getLoaderManager().initLoader(0, null, this);
-//            if (savedInstanceState == null) {
-//                Log.d("Serg", ": savedInstanceState was null-----------------");
-//                refresh();  //todo need it?
-//            }
-            //
-            View fragmentContainer = (View) findViewById(R.id.fragment_container);
-            if (mTwoPane && fragmentContainer != null) { //create detail pane
-                if (savedInstanceState != null) {
-                    Log.d("Serg", ": ArticleActivity.onCreate(): Saved Instance was null.");
-                    // return;
-                }
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_article_list);
+        mTwoPane = getResources().getBoolean(R.bool.twoPaneMode);
+        sItemId = (sItemId < 0) ? 4863 : sItemId;
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        getLoaderManager().initLoader(0, null, this);
+        if (savedInstanceState == null) {
+            refresh();
+        }
 
-                Fragment mFragment = getFragmentManager().findFragmentById(R.id.fragment_container);
-                if (mFragment == null) {
-                    ArticleDetailFragment fragment = ArticleDetailFragment.newInstance(sItemId);
-                    getFragmentManager()
-                            .beginTransaction()
-                            .add(R.id.fragment_container, fragment)
-                            .commit();
-                    Log.d("Serg", ": fragment container added, itemId= " + sItemId +
-                            "===================");
+
+        if (mTwoPane) {
+            if (sItemId == -1) {
+                final int pos = 0;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        android.support.v7.widget.RecyclerView.ViewHolder vh = mRecyclerView
+                                .findViewHolderForAdapterPosition(pos);
+                        if (vh != null) {
+                            vh.itemView.performClick();
+                        }
+                    }
+                }, 1500);
+            } else {
+                View fragmentContainer = (View) findViewById(R.id.fragment_container);
+                if (mTwoPane && fragmentContainer != null) { //create detail pane
+                    if (savedInstanceState != null) {
+                        Log.d(TAG, "ArticleActivity.onCreate(): Saved Instance was null.");
+                    }
+                    replaceDetailFragment(sItemId);
                 }
             }
-
-//        if (mTwoPane) { //create detail pane
-//            long itemId = mRecyclerView.getAdapter().getItemId(0);
-//            addDetailFragment(itemId);
-//        }
-
-//            GridLayoutManager layoutManager = ((GridLayoutManager)mRecyclerView.getLayoutManager());
-//            int firstVisiblePosition = layoutManager.findFirstVisibleItemPosition();
-
-        } catch (Exception ex) {
-            Log.e("Serg", "exception in onCreate", ex);
         }
     }
-
-
-//    private void addDetailFragment(long itemId) {
-//        getFragmentManager()
-//                .beginTransaction()
-//                .add(R.id.fragment_container, ArticleDetailFragment.newInstance(itemId))
-//                .commit();
-//    }
 
     private void refresh() {
         startService(new Intent(this, UpdaterService.class));
@@ -127,35 +98,12 @@ public class ArticleListActivity extends AppCompatActivity implements
         super.onStart();
         registerReceiver(mRefreshingReceiver,
                 new IntentFilter(UpdaterService.BROADCAST_ACTION_STATE_CHANGE));
-//todo  at point where adapter is loading or created???
-//        if (mTwoPane) { //create detail pane
-//            long itemId = 0;
-//            try {
-////itemId = mRecyclerView.getAdapter().getItemId(0);//todo how we get first itemId if we have
-// adapter
-//            } catch (Exception ex) {
-//                Log.e("Serg", "failed to get adapter.", ex);
-//            }
-//            replaceDetailFragment(itemId);//todo wrong itmeid
-//            //addDetailFragment(itemId);
-//        }
-
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         unregisterReceiver(mRefreshingReceiver);
-    }
-
-//    @Override
-//    public void onSaveInstanceState(Bundle savedInstanceState) {
-//        savedInstanceState.putLong(ITEM_ID, mItemId);
-//        super.onSaveInstanceState(savedInstanceState);
-//    }
-
-    private void updateRefreshingUI() {
-        mSwipeRefreshLayout.setRefreshing(mIsRefreshing);
     }
 
     @Override
@@ -168,26 +116,16 @@ public class ArticleListActivity extends AppCompatActivity implements
         Adapter adapter = new Adapter(cursor);
         adapter.setHasStableIds(true);
         mRecyclerView.setAdapter(adapter);
-///        int columnCount = getResources().getInteger(R.integer.list_column_count);
-///        StaggeredGridLayoutManager sglm =
-///                new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
-///        mRecyclerView.setLayoutManager(sglm);
         LinearLayoutManager m = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(m);
-
-//        int p = m.findFirstVisibleItemPosition();
-//        View child = m.findViewByPosition(1);
-
         cursor.moveToFirst();
-        if(sItemId<0) sItemId = cursor.getLong(ArticleLoader.Query._ID);
-//        replaceDetailFragment(sItemId);
-
-//        View child = (View)mRecyclerView.getChildAt(p);
-//        Log.d("Serg",": onLoadFinished() firstvispos="+p+", child=" + child +
-//                "+++first id="+id+"+++++++++++++++");
-      //  child.performClick();
-
-
+        if (sItemId < 0) {
+            try {
+                sItemId = cursor.getLong(ArticleLoader.Query._ID);
+            } catch (Exception ex) {
+                Log.e(TAG, "sItemId problems", ex);
+            }
+        }
     }
 
     @Override
@@ -206,11 +144,6 @@ public class ArticleListActivity extends AppCompatActivity implements
             ///todo remove Palette p = Palette.generate(bitmap, 12);
             Palette palette = new Palette.Builder(bitmap).generate();
             color = palette.getVibrantColor(color);
-            //int vibrantLight = palette.getLightVibrantColor(color);
-            //int vibrantDark = palette.getDarkVibrantColor(color);
-            //int muted = palette.getMutedColor(color);
-            //int mutedLight = palette.getLightMutedColor(color);
-            //int mutedDark = palette.getDarkMutedColor(color);
         }
         return color;
     }
@@ -234,20 +167,14 @@ public class ArticleListActivity extends AppCompatActivity implements
                 .commit();
     }
 
-    public void setItemId(long itemId) {
-        if(sItemId<0) sItemId = itemId; //where to open detail page at first run
-    }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ///public DynamicHeightNetworkImageView thumbnailView;
-        public NetworkImageView thumbnailView;///
+        public NetworkImageView thumbnailView;
         public TextView titleView;
         public TextView subtitleView;
 
         public ViewHolder(View view) {
             super(view);
-            ///thumbnailView = (DynamicHeightNetworkImageView) view.findViewById(R.id.thumbnail);
-            thumbnailView = (NetworkImageView) view.findViewById(R.id.thumbnail);///
+            thumbnailView = (NetworkImageView) view.findViewById(R.id.thumbnail);
             titleView = (TextView) view.findViewById(R.id.article_title);
             subtitleView = (TextView) view.findViewById(R.id.article_subtitle);
         }
@@ -274,8 +201,6 @@ public class ArticleListActivity extends AppCompatActivity implements
                 @Override
                 public void onClick(View view) {
                     sItemId = getItemId(vh.getAdapterPosition());
-                    Log.d("Serg", ": itemid:" + sItemId +
-                            "---------------------------------------------------------");
                     if (mTwoPane) {
                         replaceDetailFragment(sItemId);
                     } else {
@@ -322,8 +247,6 @@ public class ArticleListActivity extends AppCompatActivity implements
             holder.thumbnailView.setImageUrl(
                     mCursor.getString(ArticleLoader.Query.THUMB_URL),
                     ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader());
-            /// holder.thumbnailView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query
-            // .ASPECT_RATIO));
         }
 
         @Override

@@ -1,7 +1,8 @@
 <resources>
     <!-- detail -->
-    <dimen name="detail_title_text_size">42sp</dimen>
-    <dimen name="detail_body_text_size">20sp</dimen>
+    <dimen name="detail_title_text_size">68sp</dimen>
+    <dimen name="detail_subtitle_text_size">20sp</dimen>
+    <dimen name="detail_body_text_size">18sp</dimen>
 
     <dimen name="main_title_text_size">21sp</dimen>
     <dimen name="main_subtitle_text_size">15sp</dimen>
@@ -13,8 +14,17 @@
     <dimen name="thumb_width">140dp</dimen>
     <dimen name="thumb_min_height">92dp</dimen>
 
-    <dimen name="list_side_margin">16dp</dimen>
+    <dimen name="list_side_margin">0dp</dimen>
     <dimen name="list_vertical_margin">4dp</dimen>
 
+    <dimen name="detail_body_side_padding">32dp</dimen>
+    <dimen name="detail_card_margin">16dp</dimen>
+    <dimen name="detail_scroll_top_margin">460dp</dimen>
+    <dimen name="detail_text_side_padding">32dp</dimen>
+    <dimen name="detail_side_padding">64dp</dimen>
+
     <dimen name="actionBarSize">64dp</dimen>
+    <dimen name="actionBarSizeNoMargin">56dp</dimen>
+    <dimen name="collapsable_bar_size">89dp</dimen>
+
 </resources>

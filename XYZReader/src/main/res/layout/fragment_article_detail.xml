@@ -1,144 +1,111 @@
-<!--<com.example.xyzreader.ui.DrawInsetsFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/detail_frame_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--&lt;!&ndash; photo &ndash;&gt;-->
-    <!--<FrameLayout-->
-    <!--android:id="@+id/photo_container"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="#0f0">-->
-    <!--&lt;!&ndash; TODO android:background="@color/photo_placeholder"> &ndash;&gt;-->
-    <!--&lt;!&ndash;android:background="@color/photo_placeholder"> &ndash;&gt;-->
-
-    <!--&lt;!&ndash;android:layout_height="@dimen/detail_card_top_margin"&ndash;&gt;-->
     <ImageView
         android:id="@+id/photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
         android:adjustViewBounds="true"
-        android:background="@color/transparent"
+        android:background="@color/white"
         android:padding="@dimen/status_bar_height" />
-    <!--android:paddingTop="@dimen/detail_body_top_margin" />-->
 
-    <!--</FrameLayout>-->
-
-    <!--<com.example.xyzreader.ui.ObservableScrollView-->
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="0dp"
+        android:background="@color/transparent"
+        android:elevation="4dp">
 
-        <!--&lt;!&ndash;<com.example.xyzreader.ui.MaxWidthLinearLayout&ndash;&gt;-->
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center_horizontal"-->
-        <!--android:layout_marginTop="@dimen/detail_card_top_margin"-->
-        <!--android:background="#ff0"-->
-        <!--android:elevation="2dp"-->
-        <!--android:maxWidth="@dimen/detail_card_max_width"-->
-        <!--android:orientation="vertical">-->
-
-        <!-- header -->
-        <!--android:layout_gravity="top"-->
-        <!--android:layout_marginTop="@dimen/detail_card_top_margin"-->
-        <!--&lt;!&ndash;android:layout_marginBottom="@dimen/detail_metabar_vert_padding"&ndash;&gt;-->
-        <!--android:paddingLeft="@dimen/detail_inner_horiz_margin"-->
-        <!--android:paddingRight="@dimen/detail_inner_horiz_margin"-->
-        <!--android:paddingTop="@dimen/detail_metabar_vert_padding">-->
         <LinearLayout
             android:id="@+id/meta_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
+            android:layout_marginLeft="0dp"
             android:layout_marginTop="0dp"
-            android:background="@color/transparent"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/detail_inner_horiz_margin"
-            android:paddingRight="@dimen/detail_inner_horiz_margin"
-            android:paddingBottom="@dimen/detail_metabar_vert_padding"
-            android:paddingTop="300dp">
+            android:paddingBottom="0dp"
+            android:paddingLeft="@dimen/detail_side_padding"
+            android:paddingRight="@dimen/detail_side_padding"
+            android:paddingTop="@dimen/detail_scroll_top_margin">
 
-            <TextView
-                android:id="@+id/article_title"
-                style="?android:attr/textAppearanceLarge"
+            <android.support.v7.widget.CardView
+                style="@style/article"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/translucent"
-                android:fontFamily="sans-serif-condensed"
-                android:lineSpacingMultiplier="0.9"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="0dp"
-                android:layout_margin="0dp"
-                android:textColor="#fff"
-                android:textSize="@dimen/detail_title_text_size"
-                android:textStyle="bold" />
+                card_view:cardElevation="4dp">
 
-            <TextView
-                android:id="@+id/article_byline"
-                style="?android:attr/textAppearanceSmall"
+                <TextView
+                    android:id="@+id/article_title"
+                    style="@style/article"
+                    android:lineSpacingMultiplier="0.9"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/detail_title_text_size"
+                    android:textStyle="bold" />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                style="@style/article"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingTop="0dp"
-                android:paddingBottom="8dp"
-                android:layout_margin="0dp"
-                android:background="@color/translucent"
-                android:textColor="#8fff" />
+                card_view:cardElevation="4dp">
 
-            <!--android:textColorLink="@color/theme_accent"-->
-            <!--android:paddingBottom="@dimen/detail_body_bottom_margin"-->
-            <TextView
-                android:id="@+id/article_body"
-                style="?android:attr/textAppearanceMedium"
+                <TextView
+                    android:id="@+id/article_byline"
+                    style="@style/article"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/detail_subtitle_text_size" />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                style="@style/article"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="0dp"
-                android:layout_marginBottom="@dimen/detail_body_bottom_margin"
-                android:background="@color/white"
-                android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:textAlignment="center"
-                android:textColor="@color/dark_gray"
-                android:textSize="@dimen/detail_body_text_size" />
+                card_view:cardElevation="4dp">
+
+                <TextView
+                    android:id="@+id/article_body"
+                    style="@style/article"
+                    android:layout_marginBottom="@dimen/detail_body_bottom_margin"
+                    android:background="@color/white"
+                    android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="@dimen/detail_body_text_size" />
+            </android.support.v7.widget.CardView>
         </LinearLayout>
-
-        <!--</LinearLayout>-->
-        <!--&lt;!&ndash;</com.example.xyzreader.ui.MaxWidthLinearLayout>&ndash;&gt;-->
     </ScrollView>
-    <!--</com.example.xyzreader.ui.ObservableScrollView>-->
 
-
-    <!-- scrim, to make sure up button is visible -->
     <View
         android:layout_width="match_parent"
-        android:layout_height="112dp"
-        android:background="@drawable/photo_background_protection" />
+        android:layout_height="@dimen/scrim_width"
+        android:background="@drawable/photo_background_protection"
+        android:elevation="6dp" />
 
     <!-- fab -->
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/share_fab"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="@dimen/fab_margin"
+
         android:layout_marginRight="@dimen/fab_margin"
         android:background="@drawable/add_fab_background"
         android:contentDescription="@string/action_share"
-        android:elevation="@dimen/fab_elevation"
         android:src="@drawable/ic_share"
-        android:stateListAnimator="@animator/fab_state_list_anim" />
+        android:stateListAnimator="@animator/fab_state_list_anim"
 
-</FrameLayout><!--</com.example.xyzreader.ui.DrawInsetsFrameLayout>-->
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:fabSize="normal"
+        app:pressedTranslationZ="12dp" />
+
+</FrameLayout>

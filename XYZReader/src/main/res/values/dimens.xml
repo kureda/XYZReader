@@ -1,18 +1,17 @@
 <resources>
-    <!-- detail -->
-    <dimen name="detail_title_text_size">32sp</dimen>
+    <dimen name="detail_title_text_size">55sp</dimen>
     <dimen name="detail_subtitle_text_size">20sp</dimen>
     <dimen name="detail_body_text_size">16sp</dimen>
 
     <dimen name="main_title_text_size">16sp</dimen>
     <dimen name="main_subtitle_text_size">10sp</dimen>
-    <dimen name="main_text_text_size">8sp</dimen>
+    <dimen name="main_text_text_size">6sp</dimen>
 
     <item name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.0</item>
 
-    <dimen name="fab_elevation">2dp</dimen>
-    <dimen name="fab_press_translation_z">6dp</dimen>
-    <dimen name="fab_margin">24dp</dimen>
+    <dimen name="fab_elevation">8dp</dimen>
+    <dimen name="fab_press_translation_z">12dp</dimen>
+    <dimen name="fab_margin">8dp</dimen>
 
     <dimen name="thumb_width">84dp</dimen>
     <dimen name="thumb_min_height">56dp</dimen>
@@ -21,4 +20,18 @@
     <dimen name="status_bar_height">0dp</dimen>
 
     <integer name="detail_fragment_weight">0</integer>
+    <dimen name="scrim_width">72dp</dimen>
+
+    <dimen name="detail_body_side_padding">8dp</dimen>
+    <dimen name="detail_card_margin">8dp</dimen>
+    <dimen name="detail_scroll_top_margin">256dp</dimen>
+    <dimen name="detail_side_padding">16dp</dimen>
+
+    <dimen name="collapsable_bar_size">140dp</dimen>
+    <dimen name="app_bar_elevation">4dp</dimen>
+
+    <dimen name="detail_inner_horiz_margin">16dp</dimen>
+    <dimen name="detail_text_side_padding">8dp</dimen>
+    <dimen name="detail_text_cover_padding">4dp</dimen>
+    <dimen name="detail_elevation">4dp</dimen>
 </resources>

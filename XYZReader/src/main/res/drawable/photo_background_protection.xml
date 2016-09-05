@@ -6,10 +6,4 @@
         android:endColor="#0000"
         android:type="linear"
         android:useLevel="false" />
-        <!--    <gradient-->
-        <!--android:angle="-90"-->
-        <!--android:startColor="#3000"-->
-        <!--android:endColor="#0000"-->
-        <!--android:type="linear"-->
-        <!--android:useLevel="false" />-->
 </shape>

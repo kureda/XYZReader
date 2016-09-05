@@ -1,0 +1,92 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/detail_frame_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="6dp">
+
+        <LinearLayout
+            android:id="@+id/meta_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="@dimen/detail_card_margin"
+            android:layout_marginRight="@dimen/detail_card_margin"
+            android:layout_marginLeft="@dimen/detail_card_margin"
+            android:background="@color/transparent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/detail_inner_horiz_margin"
+            android:paddingRight="@dimen/detail_inner_horiz_margin"
+            android:paddingBottom="0dp"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/article_title"
+                style="@style/article"
+                android:layout_marginBottom="0dp"
+                android:background="@color/translucent"
+                android:lineSpacingMultiplier="0.9"
+                android:textColor="#fff"
+                android:textSize="@dimen/detail_title_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/article_byline"
+                style="@style/article"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:background="@color/translucent"
+                android:textColor="@color/white"
+                android:textSize="@dimen/detail_subtitle_text_size"
+                />
+
+            <ImageView
+                android:id="@+id/photo"
+                style="@style/article"
+                android:padding="0dp"
+                android:adjustViewBounds="true"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:background="@color/gray"
+                />
+
+            <TextView
+                android:id="@+id/article_body"
+                style="@style/article"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="@dimen/detail_body_bottom_margin"
+                android:background="@color/white"
+                android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
+                android:textAlignment="center"
+                android:textColor="@color/dark_gray"
+                android:textSize="@dimen/detail_body_text_size" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- scrim, to make sure up button is visible -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/scrim_width"
+        android:background="@drawable/photo_background_protection" />
+
+    <!-- fab -->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/share_fab"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:background="@drawable/add_fab_background"
+        android:contentDescription="@string/action_share"
+        android:elevation="@dimen/fab_elevation"
+        android:src="@drawable/ic_share"
+        android:stateListAnimator="@animator/fab_state_list_anim"
+        app:elevation="@dimen/fab_elevation" />
+
+</FrameLayout>
