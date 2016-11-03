@@ -1,3 +1,3 @@
 # XYZReader
-Project 5 for Nanodegree, mock news reader
-Uses Material Design concepts and tools.
+Project 5 for Google & Udacity Nanodegree. Mock of news reader.
+Usage of Material Design concepts and tools.
